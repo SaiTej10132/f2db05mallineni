@@ -1,0 +1,13 @@
+extends layout 
+
+block content 
+  h1= title 
+  - var result = [{"earbuds_name":"Apple","earbuds_size":25,"earbuds_type":"pods"},{"earbuds_name":"Realme","earbuds_size":50,"earbuds_type":"NeckBand"},{"earbuds_name":"Boat","earbuds_size":95,"earbuds_type":"Wired"}]
+  div.container-fluid
+     div.row
+        each item,index in result
+            div.col-sm-2(onclick=`buy(${index})`) Earbuds Name: #{item["earbuds_name"]}  <br>  Earbuds_size: #{item["earbuds_size"]} <br> Earbuds_type: #{item["earbuds_type"]} 
+  script.
+      function buy(index){
+         alert("you purchased item "+index+1)
+      }
