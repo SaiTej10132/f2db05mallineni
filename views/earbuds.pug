@@ -2,7 +2,7 @@ extends layout
 
 block content 
   h1= title 
-  - var result = [{"earbuds_name":"Apple","earbuds_size":25,"earbuds_type":"pods"},{"earbuds_name":"Realme","earbuds_size":50,"earbuds_type":"NeckBand"},{"earbuds_name":"Boat","earbuds_size":95,"earbuds_type":"Wired"}]
+  - var result = results 
   div.container-fluid
      div.row
         each item,index in result
