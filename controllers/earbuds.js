@@ -1,3 +1,4 @@
+const earbuds = require('../models/earbuds');
 var Earbuds = require('../models/earbuds');
 // List of all Earbudss
 exports.earbuds_list = async function(req, res) {
@@ -52,3 +53,34 @@ exports.earbuds_view_all_Page = async function(req, res) {
     res.send(`{"error": ${err}}`);
     }
     };
+
+    exports.earbuds_detail = async function(req, res) { 
+        console.log("detail"  + req.params.id) 
+        try { 
+            result = await earbuds.findById( req.params.id) 
+            res.send(result) 
+        } catch (error) { 
+            res.status(500) 
+            res.send(`{"error": document for id ${req.params.id} not found`); 
+        } 
+    }; 
+
+    exports.earbuds_update_put = async function(req, res) { 
+        console.log(`update on id ${req.params.id} with body 
+    ${JSON.stringify(req.body)}`) 
+        try { 
+            let toUpdate = await earbuds.findById( req.params.id) 
+            // Do updates of properties 
+            if(req.body.earbuds_type)  
+                   toUpdate.earbuds_type = req.body.earbuds_type; 
+            if(req.body.earbuds_name) toUpdate.earbuds_name = req.body.earbuds_name; 
+            if(req.body.earbuds_size) toUpdate.earbuds_size = req.body.earbuds_size; 
+            let result = await toUpdate.save(); 
+            console.log("Sucess " + result) 
+            res.send(result) 
+        } catch (err) { 
+            res.status(500) 
+            res.send(`{"error": ${err}: Update for id ${req.params.id} 
+    failed`); 
+        } 
+    }; 
