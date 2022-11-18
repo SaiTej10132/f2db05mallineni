@@ -1,0 +1,23 @@
+extends layout
+block content
+ h1= title
+ if(toShow == null)
+    h2 No instance to update
+ else
+ - let earbudsid = toShow._id
+ - let earbuds_name = toShow.earbuds_name
+ - let earbuds_size = toShow.earbuds_size
+ - let earbuds_type = toShow.earbuds_type
+ div
+ div.row
+  div(class='earbudsAttr mr-3') Bag ID is:
+  div #{earbudsid}
+ div.row
+ div(class='earbudsAttr mr-3') Earbuds Name is:
+ div #{earbuds_name}
+ div.row
+ div(class='earbudsAttr mr-3') Earbuds Size is:
+ div #{earbuds_size}
+ div.row
+ div(class='earbudsAttr mr-3') Earbuds type is:
+ div #{earbuds_type}

@@ -1,0 +1,28 @@
+extends layout
+block content
+ h1= title
+ form(id='EarbudsForm', action="/resource/earbudss", method="POST")
+  div.form-group
+   label.earbudsAttr(for='earbuds_name') earbuds name
+   input#earbuds_name(type='text', name='earbuds_name')
+  div.form-group
+   label.earbudsAttr(for='earbuds_size') Earbuds Size
+   input#earbuds_size(type='text', name='earbuds_size')
+  div.form-group
+   label.earbudsAttr(for='earbuds_type') Earbuds type 
+   input#earbuds_type(type='text', name='earbuds_type')
+  input(type="submit")
+ script.
+  document.forms['EarbudsForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) 
+    }).then((resp) => {
+        return resp.json();
+    }).then((body) => {
+        alert("Save succeded")
+    }).catch((error) => {
+        alert("Save failed " + error )
+    });
+   }); 
