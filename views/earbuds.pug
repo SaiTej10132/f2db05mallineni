@@ -2,13 +2,19 @@ extends layout
 block content
     div(class="container-fluid")
         h1= title
+        -let Create_destination = `dispatch(\"/earbuds/Create")`
+        button.btn( class="btn-primary ml-1",id="create" onclick= Create_destination) Create
     - let result= results 
         div(class="container-fluid")
           div(class="row m-1")
            each item in result
             -let destination = `dispatch(\"/earbuds/update?id=${item._id}\")`
+            -let Detail_destination = `dispatch(\"/earbuds/detail?id=${item._id}\")`
+            -let Update_destination = `dispatch(\"/earbuds/delete?id=${item._id}\")`
             div(class="row-sm-2" class="m-1") Item#{item.earbuds_name}(#{item.earbuds_size}) is #{item.earbuds_type}
              button.btn( class="btn-primary ml-1", onclick= destination) Update
+             button.btn( class="btn-primary ml-1", onclick= Detail_destination) Detail 
+             button.btn( class="btn-primary ml-1", onclick= Update_destination) Delete
 
     script.
         function buy(itemNo)

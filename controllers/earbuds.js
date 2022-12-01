@@ -204,9 +204,9 @@ exports.earbuds_create_post = async function(req, res) {
     // Even though bodies can be in many different formats, we will be picky 
     // and require that it be a json object 
     // {"earbuds_type":"goat", "cost":12, "size":"large"} 
-    document.item = req.body.item; 
-    document.quantity = req.body.quantity; 
-    document.cost = req.body.cost; 
+    document.earbuds_name = req.body.earbuds_name; 
+    document.earbuds_size = req.body.earbuds_size; 
+    document.earbuds_type = req.body.earbuds_type; 
     try{ 
         let result = await document.save(); 
         res.send(result); 

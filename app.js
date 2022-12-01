@@ -18,13 +18,7 @@ passport.use(new LocalStrategy(
       return done(null, user); 
     }); 
   }));
-  app.use(require('express-session')({ 
-    secret: 'keyboard cat', 
-    resave: false, 
-    saveUninitialized: false 
-  })); 
-  app.use(passport.initialize()); 
-  app.use(passport.session()); 
+  
   var Account =require('./models/account'); 
  
 passport.use(new LocalStrategy(Account.authenticate())); 
@@ -71,10 +65,7 @@ async function recreateDB() {
     if (err) return console.error(err);
     console.log("First object saved")
   });
-  instance1.save(function (err, doc) {
-    if (err) return console.error(err);
-    console.log("First object saved")
-  });
+  
   instance2.save(function (err, doc) {
     if (err) return console.error(err);
     console.log("Second object saved")
@@ -97,6 +88,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(require('express-session')({ 
+  secret: 'keyboard cat', 
+  resave: false, 
+  saveUninitialized: false 
+})); 
+app.use(passport.initialize()); 
+app.use(passport.session()); 
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
